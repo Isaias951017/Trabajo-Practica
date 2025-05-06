@@ -15,17 +15,18 @@ params = {
     "fechafin": "2025-05-04"
 }
 
-# Crear conexión y ejecutar
+# Crear conexión y ejecutarS
 engine = create_engine(DB_CONNECTION_STRING)
 with engine.connect() as conn:
     historias_clinicas = pd.read_sql(text(query), conn, params=params)
     
+#Procesamiento de columna Subejetivo
+#preprocessed_data = historias_clinicas["SUBJETIVO"].head(10)
+processed_data = expresiones_regulares(historias_clinicas["SUBJETIVO"].head(100))
+daots_tokenizados = tokenizar(processed_data.head(100))
+daots_tokenizados.to_excel("datos_tokenizados.xlsx", index=False)
 
-preprocessed_data = historias_clinicas["SUBJETIVO"].head(10)
-
-preprocessed_data.to_excel("preprocessed_data.xlsx", index=False)
-
-processed_data = expresiones_regulares(historias_clinicas["SUBJETIVO"]).head(10)
-
-processed_data.to_excel("processed_data.xlsx", index=False)
-
+#Procesamiento de coluna Objetivo 
+processed_data_objetivo = expresiones_regulares(historias_clinicas["OBJETIVO"].head(100))
+daots_tokenizados_objetivo = tokenizar(processed_data_objetivo.head(100))
+daots_tokenizados_objetivo.to_excel("datos_tokenizados_objetivo.xlsx", index=False) 
