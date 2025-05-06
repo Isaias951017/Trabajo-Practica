@@ -22,7 +22,7 @@ with engine.connect() as conn:
     historias_clinicas = pd.read_sql(text(query), conn, params=params)
     
 #Procesamiento de columna Subejetivo
-#preprocessed_data = historias_clinicas["SUBJETIVO"].head(10)
+preprocessed_data = historias_clinicas["SUBJETIVO"].head(10)
 start_time=time.time()
 processed_data = expresiones_regulares(historias_clinicas["SUBJETIVO"].head(10000))
 daots_tokenizados = tokenizar(processed_data.head(10000))
