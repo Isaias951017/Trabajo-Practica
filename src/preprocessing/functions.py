@@ -2,25 +2,25 @@ import re
 import pandas as pd
 import spacy
 from spacy.lang.es.stop_words import STOP_WORDS as stopwords
+from sklearn import preprocessing
 
 
 
 def expresiones_regulares(columna):
-    # Asegura que la columna sea texto
+    
     columna = columna.astype(str).str.lower()
 
     # Aplica la limpieza fila por fila
     return columna.apply(lambda x: re.sub(r'\s+', ' ', re.sub(r'[^a-zñü ]', '', x)).strip())
 
 
-import spacy
-import pandas as pd
 
 def tokenizar(columna: pd.Series) -> pd.Series:
-    # Cargar modelo solo una vez (más eficiente si llamas varias veces la función)
+    
     nlp = spacy.load("es_core_news_sm")
     stopwords = nlp.Defaults.stop_words
-
+    stopwords_personalizados = ["medico", "paciente", "psicologo", "psicologa", "psicologia", "psicoterapeuta", "psicoterapia","paciente","refiere"]
+    stopwords.update(stopwords_personalizados)
     # Asegurarse de que todos los valores sean string y reemplazar nulos
     columna = columna.astype(str).fillna("")
 
@@ -32,3 +32,16 @@ def tokenizar(columna: pd.Series) -> pd.Series:
         ]
     )
     return columna_tokenizada
+
+def lematizar(columna: pd.Series) -> pd.Series:
+    nlp = spacy.load("es_core_news_sm")
+    tokens = columna.apply(lambda x: [token for token in nlp(" ".join(x))])
+    lemas = tokens.apply(lambda x: [token.lemma_ for token in x])   
+    return lemas
+
+
+def label_encodering(columna: pd.Series) -> pd.Series:
+    label_encoder=preprocessing.LabelEncoder()
+    columna=label_encoder.fit_transform(columna)
+    return columna
+    

@@ -14,7 +14,8 @@ SELECT
 
     -- Texto clínico desde HCAD
     HCAD.MEMO AS SUBJETIVO,
-    HCAD_OBJETIVO.MEMO AS OBJETIVO
+    HCAD_OBJETIVO.MEMO AS OBJETIVO,
+    ISNULL(HCAD.MEMO, '') + ' ' + ISNULL(HCAD_OBJETIVO.MEMO, '') AS Concatenada
 
 FROM CIT
 INNER JOIN AFI ON AFI.IDAFILIADO = CIT.IDAFILIADO
@@ -70,7 +71,7 @@ WHERE
     )
     AND SER.CODCUPS <> '990206'
 	and MDX.CLASIF2 NOT IN ('Diabetes','Artritis','Les','Epilepsia','Conducta Suicidio','Sindrome de down','Otras Autoinmunes','Espondiloartropatia',
-							'Abuso Sexual','Ezquizofrenia','Toc','Tca','T del sueño','Demencia','Autismo')
+							'Abuso Sexual','Ezquizofrenia','Toc','Tca','T del sueño','Demencia','Autismo','T. del Sueño','Esquizofrenia','Tab','Spa')
 
 ORDER BY
     TER.RAZONSOCIAL,
