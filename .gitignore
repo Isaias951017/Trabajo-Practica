@@ -20,3 +20,4 @@ __pycache__/
 #archivo excel
 *.xlsx
 
+*.parquet
