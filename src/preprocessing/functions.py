@@ -17,7 +17,7 @@ def expresiones_regulares(columna):
 
 def tokenizar(columna: pd.Series) -> pd.Series:
     
-    nlp = spacy.load("es_core_news_sm")
+    nlp = spacy.load("es_core_news_lg")
     stopwords = nlp.Defaults.stop_words
     stopwords_personalizados = ["medico", "paciente", "psicologo", "psicologa", "psicologia", "psicoterapeuta", "psicoterapia","paciente","refiere"]
     stopwords.update(stopwords_personalizados)
@@ -34,9 +34,8 @@ def tokenizar(columna: pd.Series) -> pd.Series:
     return columna_tokenizada
 
 def lematizar(columna: pd.Series) -> pd.Series:
-    nlp = spacy.load("es_core_news_sm")
-    tokens = columna.apply(lambda x: [token for token in nlp(" ".join(x))])
-    lemas = tokens.apply(lambda x: [token.lemma_ for token in x])   
+    nlp = spacy.load("es_core_news_lg")
+    lemas = columna.apply(lambda x: [token.lemma_ for token in nlp(" ".join(x))])
     return lemas
 
 
