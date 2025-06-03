@@ -24,6 +24,7 @@ modelos_disponibles = {
 
 st.title("Clasificador de Grupo De Trastornos - Selección de Modelo")
 
+
 modelo_seleccionado = st.selectbox("Selecciona el modelo para predecir:", list(modelos_disponibles.keys()))
 
 texto_usuario = st.text_area("Ingrese el texto clínico a clasificar:")
