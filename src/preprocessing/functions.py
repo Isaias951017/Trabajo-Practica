@@ -18,9 +18,6 @@ def expresiones_regulares(df: pd.DataFrame, columna: str) -> pd.DataFrame:
 
 
 
-import spacy
-import pandas as pd
-
 def tokenizar(df: pd.DataFrame, columna: str) -> pd.DataFrame:
     df = df.copy()
     nlp = spacy.load("es_core_news_lg")

@@ -14,7 +14,7 @@ label_map = {
     5: 'T. de Ansiedad'
 }
 
-# Opciones de modelos disponibles
+#  modelos disponibles
 modelos_disponibles = {
     'SVC': 'models/modelo_svc.pkl',
     'LogisticRegression': 'models/modelo_LR.pkl',

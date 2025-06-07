@@ -25,7 +25,7 @@ with engine.connect() as conn:
     historias_clinicas = pd.read_sql(text(query), conn, params=params)
 
 # n para pruebas
-n = 1000
+n = 3000
 
 # Procesamiento de texto
 start_time = time.time()
